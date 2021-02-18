@@ -1,6 +1,6 @@
 # Overview
 
-This is an imageboard made with Django. It is a standard singular discussion imageboard. To run the server, create a folder called 'media' in the root and then within media create another folder called 'images'. Then run `python manage.py runserver`.
+This is an imageboard made with Django. It is a standard singular discussion imageboard. To run the server, create a folder called 'media' in the root and then within media create another folder called 'images'. And then run `python manage.py makemigarations` and `python manage.py migrate`. Then run `python manage.py runserver`.
 
 I made this to familiarize myself with Django and back-end web development.
 
