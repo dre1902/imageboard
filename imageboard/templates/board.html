@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>/{{ board.short_name }}/ - {{ board.name }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'imageboard/style.css' %}">
+</head>
+<body>
+    <div id="board_nav">
+        <span class="board_list">
+            [
+            {% for b in boards %}
+            <a href="{% url 'imageboard:board_view' b.short_name %}" title="{{ b.name }}">{{ b.short_name }}</a>
+            {% if forloop.counter < boards|length %}
+            /
+            {% endif %}
+            {% endfor %}
+            ]
+    </div>
+
+    <div id="board_title">/{{ board.short_name }}/ - {{ board.name }}</div>
+
+    <hr>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table id="thread_table" style="display: table;">
+            <tbody>
+                <tr data-type="Name">
+                    <td>Name</td>
+                    <td><input name="name" type="text" placeholder="Anonymous"></td>
+                </tr>
+                <tr data-type="Subject">
+                    <td>Subject</td>
+                    <td><input name="subject" type="text"></td>
+                </tr>
+                <tr data-type="Text">
+                    <td>Post</td>
+                    <td><textarea name="text" cols="48" rows="4" wrap="soft"></textarea></td>
+                    <td><input type="submit" value="Post"></td>
+                </tr>
+                <tr data-type="Image">
+                    <td>Image</td>
+                    <td><input name="image" type="file"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <hr>
+
+    {% for op_post in op_posts %}
+    <div class="op_post">
+        <div class="op_post_info">
+            <span class="subject">{{ op_post.subject }}</span>
+            <span class="name">{{ op_post.name }}</span>
+            <span class="timestamp">{{ op_post.timestamp }}</span>
+            <span class="post_num">No. {{ op_post.post_num }}</span>
+            <span class="thread_link"> [<a href="{% url 'imageboard:thread_view' board.short_name op_post.post_num %}">Open Thread</a>]</span>
+        </div>
+        <div class="op_post_image">
+            <a href="{{ op_post.image.url }}"><img src="{{ op_post.thumbnail.url }}"></a>
+        </div>
+        <p class="text">{% autoescape on %}{{ op_post.text | linebreaksbr }}{% endautoescape %}</p>
+
+        {% for post in op_post.replies %}
+        <div class="post">
+
+            <div class="post_info">
+                <span class="name">{{ post.name }}</span>
+                <span class="timestamp">{{ post.timestamp }}</span>
+                <span class="post_num">No. {{ post.post_num }}</span>
+            </div>
+            {% if post.image %}
+            <div class="post_image">
+                <a href="{{ post.image.url }}"><img src="{{ post.thumbnail.url }}"></a>
+            </div>
+            {% endif %}
+            <p class="text">{% autoescape on %}{{ post.text | linebreaksbr }}{% endautoescape %}</p>
+        </div>
+        {% endfor %}
+        <hr>
+    </div>
+    {% endfor %}
+</body>
+</html>
