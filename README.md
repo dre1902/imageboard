@@ -4,7 +4,7 @@ This is an imageboard made with Django. It is a standard singular discussion ima
 
 I made this to familiarize myself with Django and back-end web development.
 
-[Software Demo Video](http://youtube.com)
+[Software Demo Video](https://www.youtube.com/watch?v=kdnIFcWxC9I)
 
 # Web Pages
 
