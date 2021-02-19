@@ -25,9 +25,11 @@ def board_view(request, board_name):
                 bump_order = 0
             )
 
+            # Set the name to anonymous if none was given
             if op_post.name == '' or op_post.name is None:
                 op_post.name = 'Anonymous'
 
+            # Process image
             op_post.image_name = op_post.image.name
             thumb = Image.open(op_post.image)
             thumb.thumbnail((250, 250))
@@ -74,9 +76,11 @@ def thread_view(request, board_name, post_num):
                 thread = op_post
             )
 
+            # Set the name to anonymous if none was given
             if post.name == '' or post.name is None:
                 post.name = 'Anonymous'
 
+            # Process image
             if post.image:
                 post.image_name = post.image.name
                 thumb = Image.open(post.image)
@@ -89,8 +93,6 @@ def thread_view(request, board_name, post_num):
         else:
             print(PostForm(request.POST, request.FILES).errors)
 
-
-    #else:
     posts = list(Post.objects.filter(thread=op_post).order_by('post_num'))
     return render(request, 'thread.html', {
         'boards': all_boards,

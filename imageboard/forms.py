@@ -11,6 +11,7 @@ class PostForm(forms.Form):
     text = forms.CharField(label='Post', max_length=2000, required=False)
     image = forms.ImageField(required=False)
 
+    # to allow text OR an image
     def clean(self):
         clean_data = super().clean()
         if not (clean_data.get('text') is not None or clean_data.get(image) is not None):
