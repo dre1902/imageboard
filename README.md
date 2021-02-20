@@ -1,6 +1,6 @@
 # Overview
 
-This is an imageboard made with Django. It is a standard singular discussion imageboard. To run the server, create a folder called 'media' in the root and then within media create another folder called 'images'. And then run `python manage.py makemigarations` and `python manage.py migrate`. Then run `python manage.py runserver`.
+This is an imageboard made with Django. It is a standard singular discussion imageboard. To run the server, create a folder called 'media' in the root and then within media create another folder called 'images'. And then run `python manage.py makemigarations` and `python manage.py migrate`. Then run `python manage.py runserver`. The Python image library Pillow also needs to be installed.
 
 I made this to familiarize myself with Django and back-end web development.
 
@@ -18,7 +18,7 @@ The thread page shows every post for that thread.
 
 Notepad for Python and CSS, VScode for HTML, cmd prompt for running the Django shell, and git-cli.
 
-This was written in Python with Django.
+This was written in Python with Django and uses Pillow.
 
 # Useful Websites
 
